@@ -6,7 +6,7 @@
 /*   By: ydavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/28 20:10:55 by ydavis            #+#    #+#             */
-/*   Updated: 2019/08/15 18:02:09 by ydavis           ###   ########.fr       */
+/*   Updated: 2019/08/20 14:56:37 by ydavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	init_player(t_dm *dm)
 {
 	malloc_check(dm, dm->pl = (t_pl*)malloc(sizeof(t_pl)));
 	dm->pl->pos = new_v2(500, 500);
-	dm->pl->angle = 315;
+	dm->pl->angle = 150;
 	dm->pl->fov = 60;
 	dm->pl->turn = 90;
 	dm->pl->speed = 90;
@@ -55,18 +55,19 @@ void	init_const(t_dm *dm)
 
 void	init_sect(t_dm *dm)
 {
-/*
-	dm->sect.pts = (t_v2*)malloc(sizeof(t_v2) * 4);
-	dm->sect.pts[0] = new_v2(200.0, 300.0);
-	dm->sect.pts[1] = new_v2(300.0, 300.0);
-	dm->sect.pts[2] = new_v2(300.0, 200.0);
-	dm->sect.pts[3] = new_v2(200.0, 200.0);
-	dm->sect.numpts = 4;
-*/
+	dm->sect.pts = (t_v2*)malloc(sizeof(t_v2) * 5);
+	dm->sect.pts[0] = new_v2(200.0, 100.0);
+	dm->sect.pts[1] = new_v2(0.0, 100.0);
+	dm->sect.pts[2] = new_v2(100.0, 200.0);
+	dm->sect.pts[3] = new_v2(500.0, 200.0);
+	dm->sect.pts[4] = new_v2(200.0, 100.0);
+	dm->sect.numpts = 5;
+	/*
 	dm->sect.pts = (t_v2*)malloc(sizeof(t_v2) * 2);
 	dm->sect.pts[0] = new_v2(200.0, 200.0);
 	dm->sect.pts[1] = new_v2(400.0, 400.0);
 	dm->sect.numpts = 2;
+*/
 }
 
 t_dm	*init_dm(int ac, char **av)

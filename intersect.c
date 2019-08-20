@@ -6,7 +6,7 @@
 /*   By: ydavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 15:57:21 by ydavis            #+#    #+#             */
-/*   Updated: 2019/08/15 18:16:05 by ydavis           ###   ########.fr       */
+/*   Updated: 2019/08/20 14:24:43 by ydavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int		pointside(t_v2 p, t_v2 a, t_v2 b)
 t_v2	intersect(t_v2 a, t_v2 b, t_v2 c, t_v2 d)
 {
 	t_v2 ret;
+/*
 	double x;
 	double y;
 	double det;
@@ -46,7 +47,7 @@ t_v2	intersect(t_v2 a, t_v2 b, t_v2 c, t_v2 d)
 	y = vxs(x, a.y - b.y, y, c.y - d.y) / det;
 	ret.x = x;
 	ret.y = y;
-	/*
+*/
 	ret.x = vxs(vxs(a.x, a.y, b.x, b.y),
 			a.x - b.x, vxs(c.x, c.y, d.x, d.y),
 			c.x - d.x) /
@@ -55,6 +56,5 @@ t_v2	intersect(t_v2 a, t_v2 b, t_v2 c, t_v2 d)
 			a.y - b.y, vxs(c.x, c.y, d.x, d.y),
 			c.y - d.y) /
 		vxs(a.x - b.x, a.y - b.y, c.x - d.x, c.y - d.y);
-	*/
 	return (ret);
 }
