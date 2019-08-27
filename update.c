@@ -6,7 +6,7 @@
 /*   By: ydavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/28 20:21:20 by ydavis            #+#    #+#             */
-/*   Updated: 2019/08/20 14:53:19 by ydavis           ###   ########.fr       */
+/*   Updated: 2019/08/27 19:46:05 by ydavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,12 @@ void	draw(t_dm *dm)
 {
 	int i;
 	int j;
+	int	sect;
 	t_v3 tmp1;
 	t_v3 tmp2;
 	t_v3 p1;
 	t_v3 p2;
+	t_sect now;
 	
 	i = 0;
 	while (i < dm->width)
@@ -82,30 +84,28 @@ void	draw(t_dm *dm)
 		}
 		i++;
 	}
-
-	i = 0;
+	sect = 0;
+	/*
 	while (i < dm->sect.numpts - 1)
 	{
-		printf("%d\n", i);
 		tmp1.x = dm->sect.pts[i].x;
 		tmp1.y = dm->sect.pts[i].y;
 		
-		/*
-		if (i == dm->sect.numpts - 1)
-		{
-			tmp2.x = dm->sect.pts[0].x;
-			tmp2.y = dm->sect.pts[0].y;
-		}
-		else
-		{
-			tmp2.x = dm->sect.pts[i + 1].x;
-			tmp2.y = dm->sect.pts[i + 1].y;
-		}
-		*/
-	
 		tmp2.x = dm->sect.pts[i + 1].x;
 		tmp2.y = dm->sect.pts[i + 1].y;
-
+*/
+	while (sect < dm->nsects)
+	{
+	now = dm->sects[sect];
+	i = 0;
+	while (i < now.numpts - 1)
+	{
+		tmp1.x = now.pts[i].x;
+		tmp1.y = now.pts[i].y;
+		
+		tmp2.x = now.pts[i + 1].x;
+		tmp2.y = now.pts[i + 1].y;
+	
 		tmp1.x -= dm->pl->pos.x;
 		tmp1.y -= dm->pl->pos.y;
 		tmp2.x -= dm->pl->pos.x;
@@ -122,11 +122,11 @@ void	draw(t_dm *dm)
 
 		if (p1.z <= 0 && p2.z <= 0)
 		{
-			printf("NOT IN FRONT!!! %f %f\n", p1.z, p2.z);
+//			printf("NOT IN FRONT!!! %f %f\n", p1.z, p2.z);
 			i++;
 			continue ;
 		}
-	
+
 	/*	
 		fabs(p1.x - p2.x) <= fabs(p1.z - p2.z) ?
 							 draw_y(dm, new_v2(p1.x, p1.z), new_v2(p2.x, p2.z)) :
@@ -134,10 +134,6 @@ void	draw(t_dm *dm)
 		i++;
 	*/
 
-		if (dm->right || dm->left || dm->up || dm->down || dm->strafel || dm->strafer)
-		{
-			printf("PL POS = (%f : %f)\nPL ANGLE = %f\nWALL POS = (%f : %f) -> (%f : %f)\n", dm->pl->pos.x, dm->pl->pos.y, dm->pl->angle, p1.x, p1.y, p2.x, p2.y);
-		}
 		//TRANSFER THOSE TO THE TOP!!!
 		t_v2	intr1;
 		t_v2	intr2;
@@ -148,7 +144,6 @@ void	draw(t_dm *dm)
 
 		if (p1.z <= 0 || p2.z <= 0)
 		{
-			printf("PARTIALLY BEHIND!!!\n%f %f\n", p1.z, p2.z);
 			intr1 = intersect(new_v2(p1.x, p1.z), new_v2(p2.x, p2.z), new_v2(-1e-4f, 1e-4f), new_v2(-20, 5));
 			intr2 = intersect(new_v2(p1.x, p1.z), new_v2(p2.x, p2.z), new_v2(1e-4f, 1e-4f), new_v2(20, 5));
 
@@ -180,11 +175,6 @@ void	draw(t_dm *dm)
 				}
 			}
 		}
-			printf("PL POS = (%f : %f)\nPL ANGLE = %f\nWALL POS = (%f : %f) -> (%f : %f)\n", dm->pl->pos.x, dm->pl->pos.y, dm->pl->angle, p1.x, p1.z, p2.x, p2.z);
-		if (dm->right || dm->left || dm->up || dm->down || dm->strafel || dm->strafer)
-		{
-		//	printf("FIRST INTERSECT = (%f : %f)\nSECOND INTERSECT = (%f : %f)\n", intr1.x, intr1.y, intr2.x, intr2.y);
-		}
 
 		topl.x = -p1.x * 256 / p1.z;
 		topl.y = -3500 / p1.z;
@@ -198,8 +188,6 @@ void	draw(t_dm *dm)
 		botr.x = topr.x;
 		botr.y = 3500 / p2.z;
 
-		printf("PRINTING...\n");
-		printf("topl -> (%f %f)\ntopr -> (%f %f)\nbotl = (%f %f)\nbotr = (%f %f)\n", topl.x, topl.y, topr.x, topr.y, botl.x, botl.y, botr.x, botr.y);
 		fabs(topl.x - topr.x) <= fabs(topl.y - topr.y) ?
 							 draw_y(dm, topl, topr) :
 							 draw_x(dm, topl, topr);
@@ -216,8 +204,9 @@ void	draw(t_dm *dm)
 							 draw_y(dm, topl, botl) :
 							 draw_x(dm, topl, botl);
 
-		printf("DONE PRINTING!\n");
 		i++;
+	}
+	sect++;
 	}
 	
 	update(dm, 0);

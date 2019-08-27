@@ -6,7 +6,7 @@
 /*   By: ydavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/28 21:12:18 by ydavis            #+#    #+#             */
-/*   Updated: 2019/08/20 14:49:47 by ydavis           ###   ########.fr       */
+/*   Updated: 2019/08/27 19:40:29 by ydavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	move_up(t_dm *wf)
 
 	x = wf->pl->pos.x;
 	y = wf->pl->pos.y;
-	x += cos(degtorad(wf->pl->angle));
-	y += sin(degtorad(wf->pl->angle));
+	x += cos(degtorad(wf->pl->angle)) * 0.125;
+	y += sin(degtorad(wf->pl->angle)) * 0.125;
 	wf->pl->pos.x = x;
 	wf->pl->pos.y = y;
 }
@@ -32,8 +32,8 @@ void	move_down(t_dm *wf)
 
 	x = wf->pl->pos.x;
 	y = wf->pl->pos.y;
-	x -= cos(degtorad(wf->pl->angle));
-	y -= sin(degtorad(wf->pl->angle));
+	x -= cos(degtorad(wf->pl->angle)) * 0.125;
+	y -= sin(degtorad(wf->pl->angle)) * 0.125;
 	wf->pl->pos.x = x;
 	wf->pl->pos.y = y;
 }
@@ -45,8 +45,8 @@ void	strafe_right(t_dm *wf)
 
 	x = wf->pl->pos.x;
 	y = wf->pl->pos.y;
-	x += cos(degtorad(wf->pl->angle + 90));
-	y += sin(degtorad(wf->pl->angle + 90));
+	x += cos(degtorad(wf->pl->angle + 90)) * 0.125;
+	y += sin(degtorad(wf->pl->angle + 90)) * 0.125;
 	wf->pl->pos.x = x;
 	wf->pl->pos.y = y;
 }
@@ -58,8 +58,8 @@ void	strafe_left(t_dm *wf)
 
 	x = wf->pl->pos.x;
 	y = wf->pl->pos.y;
-	x += cos(degtorad(wf->pl->angle - 90));
-	y += sin(degtorad(wf->pl->angle - 90));
+	x += cos(degtorad(wf->pl->angle - 90)) * 0.125;
+	y += sin(degtorad(wf->pl->angle - 90)) * 0.125;
 	wf->pl->pos.x = x;
 	wf->pl->pos.y = y;
 }

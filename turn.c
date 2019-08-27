@@ -6,7 +6,7 @@
 /*   By: ydavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/28 21:20:30 by ydavis            #+#    #+#             */
-/*   Updated: 2019/08/20 14:55:18 by ydavis           ###   ########.fr       */
+/*   Updated: 2019/08/27 19:41:15 by ydavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	turn_right(t_dm *wf)
 {
-	wf->pl->angle++;
+	wf->pl->angle += 0.5;
 	if (wf->pl->angle >= 360)
 		wf->pl->angle -= 360;
 }
 
 void	turn_left(t_dm *wf)
 {
-	wf->pl->angle--;
+	wf->pl->angle -= 0.5;
 	if (wf->pl->angle < 0)
 		wf->pl->angle += 360;
 }
